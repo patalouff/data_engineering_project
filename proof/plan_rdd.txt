@@ -1,0 +1,7 @@
+2026-01-03 16:31:54.763708
+
+InMemoryTableScan [id#193, category#194, value#195, text#196]
+   +- InMemoryRelation [id#193, category#194, value#195, text#196], StorageLevel(disk, memory, deserialized, 1 replicas)
+         +- Union
+            :- FileScan csv [id#193,category#194,value#195,text#196] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/home/qdomon/data/lab1_dataset_a.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:int,category:string,value:double,text:string>
+            +- FileScan csv [id#214,category#215,value#216,text#217] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/home/qdomon/data/lab1_dataset_b.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:int,category:string,value:double,text:string>

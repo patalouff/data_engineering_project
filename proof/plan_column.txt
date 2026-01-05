@@ -1,0 +1,12 @@
+2026-01-03 19:18:49.016725
+AdaptiveSparkPlan isFinalPlan=false
++- TakeOrderedAndProject(limit=50, orderBy=[n#1849L DESC NULLS LAST], output=[year#1625,month#1626,prev_title#1620,curr_title#1621,n#1849L])
+   +- HashAggregate(keys=[year#1625, month#1626, prev_title#1620, curr_title#1621], functions=[sum(n#1623)], output=[year#1625, month#1626, prev_title#1620, curr_title#1621, n#1849L])
+      +- Exchange hashpartitioning(year#1625, month#1626, prev_title#1620, curr_title#1621, 400), ENSURE_REQUIREMENTS, [plan_id=4696]
+         +- HashAggregate(keys=[year#1625, month#1626, prev_title#1620, curr_title#1621], functions=[partial_sum(n#1623)], output=[year#1625, month#1626, prev_title#1620, curr_title#1621, sum#1964L])
+            +- Project [prev_title#1620, curr_title#1621, n#1623, year#1625, month#1626]
+               +- Filter (isnotnull(type#1622) AND (type#1622 = link))
+                  +- InMemoryTableScan [curr_title#1621, month#1626, n#1623, prev_title#1620, type#1622, year#1625], [isnotnull(type#1622), (type#1622 = link)]
+                        +- InMemoryRelation [prev_title#1620, curr_title#1621, type#1622, n#1623, ts#1624, year#1625, month#1626], StorageLevel(disk, memory, deserialized, 1 replicas)
+                              +- *(1) ColumnarToRow
+                                 +- FileScan parquet [prev_title#1620,curr_title#1621,type#1622,n#1623,ts#1624,year#1625,month#1626] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/home/qdomon/outputs/lab3/columnar/clicks_parquet], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<prev_title:string,curr_title:string,type:string,n:int,ts:timestamp>

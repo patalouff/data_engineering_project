@@ -1,0 +1,7 @@
+2026-01-03 16:31:27.917689
+
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[user_id#56], functions=[count(1), sum(price#58)], output=[user_id#56, n#78L, total#79])
+   +- Exchange hashpartitioning(user_id#56, 200), ENSURE_REQUIREMENTS, [plan_id=126]
+      +- HashAggregate(keys=[user_id#56], functions=[partial_count(1), partial_sum(price#58)], output=[user_id#56, count#91L, sum#92])
+         +- FileScan csv [user_id#56,price#58] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/home/qdomon/data/sample_sales.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<user_id:int,price:double>
